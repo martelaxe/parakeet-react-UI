@@ -13,16 +13,16 @@ const {
 const ethers = require('ethers')
 require('dotenv').config({ path: __dirname + '.env' })
 
-function Card({route}) {
-  const {bridgeName, output, totalFee} = route;
-  return <div>
-    <div>bridge: {bridgeName}</div>
-    <div>amountOut: {output}</div>
-    <div>gasFees: {totalFee}</div>
-
-  </div>
+function Card({ route }) {
+  const { bridgeName, output, totalFee } = route
+  return (
+    <div>
+      <div>bridge: {bridgeName}</div>
+      <div>amountOut: {output}</div>
+      <div>gasFees: {totalFee}</div>
+    </div>
+  )
 }
-
 
 function App() {
   //amount, setAmount, fromChain, setFromChain, toChain, setToChain, fromToken, setFromToken, toToken, setToToken, clickEvent
@@ -37,8 +37,7 @@ function App() {
 
   const [amount, setAmount] = useState(1)
   const [routes, setRoutes] = useState([])
-
-
+  const [txHash, setTxHash] = useState(null)
 
   async function transferFunction() {
     try {
@@ -160,6 +159,7 @@ function App() {
         .approveAndSendWithRoute(route)
 
       console.log(tx, isClaimRequired, bridgeName)
+      setTxHash(tx.hash)
 
       await tx.wait()
 
@@ -181,7 +181,6 @@ function App() {
           await claimTx.wait()
 
           console.log(claimTx)
-
         })
         .on(WatcherEvent.DestinationTxStarted, (data) => {
           console.log('🚀 Destination Tx Started ', data)
@@ -195,7 +194,7 @@ function App() {
   }
   return (
     <div className="App">
-      <h2>Basic MOVR DEMO</h2>
+      <h2>FUND-MOVR</h2>
       <Form
         toChain={toChain}
         setToChain={setToChain}
@@ -212,13 +211,29 @@ function App() {
       />
       {routes.length !== 0 ? (
         <div>
-         <h1> Routes </h1> 
+          <h1> Routes </h1>
           <ol>
-            {routes.map(route => <li key={route.bridgeName} style={{margin:'1rem',padding:'1rem 0.5rem'}} > <Card  route={route} >{JSON.stringify(route)}</Card> </li>)}
+            {routes.map((route) => (
+              <li
+                key={route.bridgeName}
+                style={{ margin: '1rem', padding: '1rem 0.5rem' }}
+              >
+                {' '}
+                <Card route={route}>{JSON.stringify(route)}</Card>{' '}
+              </li>
+            ))}
           </ol>
         </div>
       ) : null}
-
+      {txHash ? (
+        <div>
+          {' '}
+          Transaction:{' '}
+          <a target="_blank" href={`https://polygonscan.com/tx/${txHash}`}>
+            {txHash}
+          </a>
+        </div>
+      ) : null}
     </div>
   )
 }
