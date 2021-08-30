@@ -1,6 +1,6 @@
 import './../App.css';
 
-const Form = ({ amount, setAmount, fromChain, setFromChain, toChain, setToChain, fromToken, setFromToken, toToken, setToToken, clickEvent }) => {
+const Form = ({ amount, setAmount, fromChain, setFromChain, toChain, setToChain, fromToken, setFromToken, toToken, setToToken, clickEvent,sendFunction }) => {
     return (
         <div className="form">
             <label>
@@ -28,7 +28,8 @@ const Form = ({ amount, setAmount, fromChain, setFromChain, toChain, setToChain,
                 Amount:
                 <input name="Amount" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
             </label>
-        <button onClick={() => clickEvent()}>Proceed</button>
+        <button onClick={() => clickEvent()}>Get Routes</button>
+        <button onClick={() => sendFunction()}>Send</button>
         </div>)
 };
 export default Form;
