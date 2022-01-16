@@ -24,6 +24,8 @@ function Card({ route }) {
   )
 }
 
+
+
 function App() {
   //amount, setAmount, fromChain, setFromChain, toChain, setToChain, fromToken, setFromToken, toToken, setToToken, clickEvent
   const [fromChain, setFromChain] = useState(137)
@@ -34,12 +36,11 @@ function App() {
   const [toToken, setToToken] = useState(
     '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
   )
+  const address = "demo.eth";
 
-  const [amount, setAmount] = useState(1)
-  const [routes, setRoutes] = useState([])
-  const [txHash, setTxHash] = useState(null)
+  startEthereum()
 
-  async function transferFunction() {
+  async function startEthereum() {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
 
@@ -47,34 +48,34 @@ function App() {
 
       const signer = provider.getSigner()
 
-      const movr = new Movr(signer)
+      // const movr = new Movr(signer)
 
-      const sendingChain = new Chain(
-        fromChain,
-        'https://rpc-mainnet.matic.network/',
-      )
-      const destinationChain = new Chain(toChain, 'https://rpc.xdaichain.com/')
-      console.log(process.env)
-      // from Chain  - 137
-      // to Chain - 100
+      // const sendingChain = new Chain(
+      //   fromChain,
+      //   'https://rpc-mainnet.matic.network/',
+      // )
+      // const destinationChain = new Chain(toChain, 'https://rpc.xdaichain.com/')
+      // console.log(process.env)
+      // // from Chain  - 137
+      // // to Chain - 100
 
-      const USDC_POLGYON_ADDRESS = fromToken
-      //0x2791bca1f2de4661ed88a30c99a7a9449aa84174
+      // const USDC_POLGYON_ADDRESS = fromToken
+      // //0x2791bca1f2de4661ed88a30c99a7a9449aa84174
 
-      const token = new Token(USDC_POLGYON_ADDRESS, sendingChain)
+      // const token = new Token(USDC_POLGYON_ADDRESS, sendingChain)
 
-      const mainAmount = (amount * 1000000).toString()
+      // const mainAmount = (amount * 1000000).toString()
 
-      const result = await movr
-        .connect(signer)
-        .move(token, sendingChain, destinationChain)
-        .estimateFee(RouteOptions.MaxOutput, mainAmount)
+      // const result = await movr
+      //   .connect(signer)
+      //   .move(token, sendingChain, destinationChain)
+      //   .estimateFee(RouteOptions.MaxOutput, mainAmount)
 
-      console.log('quote ', result)
-      setRoutes(result.routes)
-      const route = result.routes[0]
+      // console.log('quote ', result)
+      // setRoutes(result.routes)
+      // const route = result.routes[0]
 
-      console.log('sending route ', route)
+      // console.log('sending route ', route)
 
       // const [tx, { isClaimRequired, bridgeName }] = await movr
       //   .connect(signer)
@@ -118,98 +119,96 @@ function App() {
 
   async function sendFunction() {
     try {
+
+
+      console.log("Data: ", fromChain, toToken);
+
       const provider = new ethers.providers.Web3Provider(window.ethereum)
 
       await provider.send('eth_requestAccounts', [])
 
-      const signer = provider.getSigner()
+      // const signer = provider.getSigner()
 
-      const movr = new Movr(signer)
+      // const movr = new Movr(signer)
 
-      const sendingChain = new Chain(
-        fromChain,
-        'https://rpc-mainnet.matic.network/',
-      )
-      const destinationChain = new Chain(toChain, 'https://rpc.xdaichain.com/')
-      console.log(process.env)
-      // from Chain  - 137
-      // to Chain - 100
+      // const sendingChain = new Chain(
+      //   fromChain,
+      //   'https://rpc-mainnet.matic.network/',
+      // )
+      // const destinationChain = new Chain(toChain, 'https://rpc.xdaichain.com/')
+      // console.log(process.env)
+      // // from Chain  - 137
+      // // to Chain - 100
 
-      const USDC_POLGYON_ADDRESS = fromToken
-      //0x2791bca1f2de4661ed88a30c99a7a9449aa84174
+      // const USDC_POLGYON_ADDRESS = fromToken
+      // //0x2791bca1f2de4661ed88a30c99a7a9449aa84174
 
-      const token = new Token(USDC_POLGYON_ADDRESS, sendingChain)
+      // const token = new Token(USDC_POLGYON_ADDRESS, sendingChain)
 
-      const mainAmount = (amount * 1000000).toString()
+      // const mainAmount = (amount * 1000000).toString()
 
-      const result = await movr
-        .connect(signer)
-        .move(token, sendingChain, destinationChain)
-        .estimateFee(RouteOptions.MaxOutput, mainAmount)
+      // const result = await movr
+      //   .connect(signer)
+      //   .move(token, sendingChain, destinationChain)
+      //   .estimateFee(RouteOptions.MaxOutput, mainAmount)
 
-      console.log('quote ', result)
-      setRoutes(result.routes)
-      const route = result.routes[0]
+      // console.log('quote ', result)
+      // setRoutes(result.routes)
+      // const route = result.routes[0]
 
-      console.log('sending route ', route)
+      // console.log('sending route ', route)
 
-      const [tx, { isClaimRequired, bridgeName }] = await movr
-        .connect(signer)
-        .move(token, sendingChain, destinationChain)
-        .approveAndSendWithRoute(route)
+      // const [tx, { isClaimRequired, bridgeName }] = await movr
+      //   .connect(signer)
+      //   .move(token, sendingChain, destinationChain)
+      //   .approveAndSendWithRoute(route)
 
-      console.log(tx, isClaimRequired, bridgeName)
-      setTxHash(tx.hash)
+      // console.log(tx, isClaimRequired, bridgeName)
+      // setTxHash(tx.hash)
 
-      await tx.wait()
+      // await tx.wait()
 
-      movr
-        .watch(tx.hash, sendingChain, destinationChain, token, bridgeName)
-        .on(WatcherEvent.SourceTxStarted, (data) => {
-          console.log('🚀 Source Tx Started ', data)
-        })
-        .on(WatcherEvent.SourceTxCompleted, (data) => {
-          console.log('🚀 Source Tx ', data)
-        })
-        .on(WatcherEvent.ClaimToBeStarted, async (data) => {
-          console.log('🚀 Claim to be started ', data)
+      // movr
+      //   .watch(tx.hash, sendingChain, destinationChain, token, bridgeName)
+      //   .on(WatcherEvent.SourceTxStarted, (data) => {
+      //     console.log('🚀 Source Tx Started ', data)
+      //   })
+      //   .on(WatcherEvent.SourceTxCompleted, (data) => {
+      //     console.log('🚀 Source Tx ', data)
+      //   })
+      //   .on(WatcherEvent.ClaimToBeStarted, async (data) => {
+      //     console.log('🚀 Claim to be started ', data)
 
-          const claimTx = await movr
-            .connect(signer)
-            .claim(data.txHash, sendingChain, destinationChain)
+      //     const claimTx = await movr
+      //       .connect(signer)
+      //       .claim(data.txHash, sendingChain, destinationChain)
 
-          await claimTx.wait()
+      //     await claimTx.wait()
 
-          console.log(claimTx)
-        })
-        .on(WatcherEvent.DestinationTxStarted, (data) => {
-          console.log('🚀 Destination Tx Started ', data)
-        })
-        .on(WatcherEvent.DestinationTxCompleted, (data) => {
-          console.log('🚀 Destination Tx Ended', data)
-        })
-    } catch (err) {
+      //     console.log(claimTx)
+      //   })
+      //   .on(WatcherEvent.DestinationTxStarted, (data) => {
+      //     console.log('🚀 Destination Tx Started ', data)
+      //   })
+      //   .on(WatcherEvent.DestinationTxCompleted, (data) => {
+      //     console.log('🚀 Destination Tx Ended', data)
+      //   })
+    }
+    catch (err) {
       console.log(err)
     }
   }
   return (
     <div className="App">
-      <h2>FUND-MOVR</h2>
+
       <Form
-        toChain={toChain}
-        setToChain={setToChain}
         fromChain={fromChain}
         setFromChain={setFromChain}
-        fromToken={fromToken}
-        setFromToken={setFromToken}
         toToken={toToken}
         setToToken={setToToken}
-        amount={amount}
-        setAmount={setAmount}
-        clickEvent={transferFunction}
         sendFunction={sendFunction}
       />
-      {routes.length !== 0 ? (
+      {/* {routes.length !== 0 ? (
         <div>
           <h1> Routes </h1>
           <ol>
@@ -233,9 +232,11 @@ function App() {
             {txHash}
           </a>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   )
 }
 
 export default App
+
+
