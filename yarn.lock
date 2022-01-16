@@ -1621,38 +1621,7 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hop-protocol/core@*":
-  version "0.0.1-beta.57"
-  resolved "https://registry.yarnpkg.com/@hop-protocol/core/-/core-0.0.1-beta.57.tgz#fd9d8e62f6ba9db4c5edaf9c730e0d2e7f323436"
-  integrity sha512-/X/li7wiC1/d564D+Nw6u+jUlyVVPcAbemDOYnFG3nqvvU5E+eho/AN+oVEZXuH4t9n0NqgqAxUJD55Jlczekg==
-  dependencies:
-    ethers "^5.5.1"
 
-"@hop-protocol/core@0.0.1-beta.13":
-  version "0.0.1-beta.13"
-  resolved "https://registry.npmjs.org/@hop-protocol/core/-/core-0.0.1-beta.13.tgz"
-  integrity sha512-emtKHu3DuAQpKYEtUPzoSzaIAHzUCOf7xF/oqZlVRSaMZ2rq2eZwHbxb2vC0xZRyQp065VuI0oes7yftnrBZ+g==
-  dependencies:
-    deepmerge "^4.2.2"
-
-"@hop-protocol/sdk@0.0.1-beta.117":
-  version "0.0.1-beta.117"
-  resolved "https://registry.npmjs.org/@hop-protocol/sdk/-/sdk-0.0.1-beta.117.tgz"
-  integrity sha512-Rg3Rm3+23GfXsz5n7OAgFSHQDV1gRWcQCjTq1p3lrGvsk18uz935v/O3zvxoK0db/98NXALkHZ9FXyeN675qsQ==
-  dependencies:
-    "@hop-protocol/core" "0.0.1-beta.13"
-    "@maticnetwork/maticjs" "^2.0.38"
-    "@types/isomorphic-fetch" "0.0.35"
-    "@types/luxon" "^1.27.1"
-    dotenv "^8.2.0"
-    ethereum-block-by-date "^1.4.0"
-    ethereum-checksum-address "0.0.6"
-    eventemitter3 "^4.0.7"
-    fast-memoize "^2.5.2"
-    isomorphic-fetch "^3.0.0"
-    luxon "^2.0.1"
-    snake-case "^3.0.4"
-    web3 "^1.3.5"
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
@@ -1882,24 +1851,8 @@
   resolved "https://registry.npmjs.org/@maticnetwork/meta/-/meta-2.4.27.tgz"
   integrity sha512-8J15EOVoIYwZniIJiuXjjOTPudXk0eQiXRgwRoS7JYYij3Xhj8ast4IlxFQjIo6O5Z81iWnZVeH68em/Y8vbdg==
 
-"@movr/fund-movr-core@0.0.1-beta.12":
-  version "0.0.1-beta.12"
-  resolved "https://registry.npmjs.org/@movr/fund-movr-core/-/fund-movr-core-0.0.1-beta.12.tgz"
-  integrity sha512-wQMwQ4x61myGvAXm4Pp3+25HVbOSKidGpJEhUSzpk+e+O4So0UpfnRw6vqQGwQAtM2Skqt35GJIDMs8BJyBoaQ==
 
-"@movr/fund-movr-sdk@^0.0.1-beta.5":
-  version "0.0.1-beta.5"
-  resolved "https://registry.yarnpkg.com/@movr/fund-movr-sdk/-/fund-movr-sdk-0.0.1-beta.5.tgz#6bf52dd9a0881106363e03c7a11c197ad63bcf12"
-  integrity sha512-K07ZFmGOvGV1toNwM2HOjuhcEoerwlJ1xSpUThnjvoCoi2wOjoACdWeicJ7MzumdthlwU+dv8F1LBuCDY3c+0Q==
-  dependencies:
-    "@hop-protocol/core" "*"
-    "@hop-protocol/sdk" "0.0.1-beta.117"
-    "@maticnetwork/maticjs" "^2.0.45"
-    "@movr/fund-movr-core" "0.0.1-beta.12"
-    axios "^0.21.1"
-    ethereum-block-by-date "^1.4.0"
-    ethers "^5.4.1"
-    eventemitter3 "^4.0.7"
+
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
